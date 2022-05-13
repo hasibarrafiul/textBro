@@ -5,13 +5,14 @@
     <title>Home</title>
 </head>
 <body>
-<form method="POST">
+<form method="POST" action="{% url 'textBro:saveText' link %}">
 		{% csrf_token %}
 {{ link }}<br>
 <textarea name="edit-box" rows="4" cols="50" maxlength="200">
 {{ text }}
 </textarea>
-    <button type="submit"><a href="{% url 'textBro:saveText' link %}">Save</a></button>
+    <button type="submit">Save</button>
 </form>
+
 </body>
 </html>

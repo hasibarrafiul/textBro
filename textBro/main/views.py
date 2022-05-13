@@ -26,6 +26,8 @@ def editText(request, link):
 
 def saveText(request, link):
     instance = texts.objects.get(text_link=link)
-    instance.text = "gg"
+    if request.method == "POST":
+        textEditBox = request.POST['edit-box']
+    instance.text = textEditBox
     instance.save()
     return redirect('/')
