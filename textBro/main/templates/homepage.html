@@ -5,6 +5,11 @@
     <title>Home</title>
 </head>
 <body>
+{% for field in form %}
+            <div class="fieldWrapper">
+                {{ field.errors }}
+            </div>
+        {% endfor %}
 <form method="post">
     {% csrf_token %}
     {{ form.text_link }}
