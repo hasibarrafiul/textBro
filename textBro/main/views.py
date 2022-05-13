@@ -1,6 +1,31 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.http import HttpResponse, HttpResponseRedirect
+from django.shortcuts import render, redirect
+from .forms import textsForm
+from .models import texts
 
 
 def index(request):
-    return render(request, 'homepage.html')
+    form = textsForm()
+    if request.method == 'POST':
+        form = textsForm(request.POST)
+        if form.is_valid():
+            instance = form.save(commit=False)
+            instance.save()
+            next = request.POST.get('next', '/')
+            return HttpResponseRedirect(next)
+    else:
+        form = textsForm()
+    return render(request, 'homepage.html', {'form': form})
+
+
+def editText(request, link):
+    instance = texts.objects.get(text_link=link)
+    context = {'link': instance.text_link, 'text': instance.text}
+    return render(request, 'editText.html', context)
+
+
+def saveText(request, link):
+    instance = texts.objects.get(text_link=link)
+    instance.text = "gg"
+    instance.save()
+    return redirect('/')
