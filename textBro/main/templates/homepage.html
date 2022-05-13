@@ -10,5 +10,16 @@
     {{ form }}
     <input type="submit" value="Submit">
 </form>
+<br>
+<br>
+<br>
+<br>
+<br>
+<form method="post" action="{% url 'textBro:verify' %}">
+    {% csrf_token %}
+    <input type="text" name="text-link">
+    <input type="text" name="text-password">
+    <input type="submit" value="Submit">
+</form>
 </body>
 </html>

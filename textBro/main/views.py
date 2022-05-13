@@ -31,3 +31,19 @@ def saveText(request, link):
     instance.text = textEditBox
     instance.save()
     return redirect('/edit/' + link)
+
+
+def verify(request):
+    instance = None
+    if request.method == "POST":
+        link_input = request.POST['text-link']
+        password_input = request.POST['text-password']
+        try:
+            instance = texts.objects.get(text_link=link_input, text_password=password_input)
+        except Exception as e:
+            print(e)
+        if instance is not None:
+            return redirect('/edit/' + link_input)
+        else:
+            return redirect('/')
+    return redirect('/')

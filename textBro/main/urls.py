@@ -9,4 +9,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('edit/<str:link>', views.editText, name="editText"),
     path('save/<str:link>', views.saveText, name="saveText"),
+    path('verify', views.verify, name="verify"),
 ]
