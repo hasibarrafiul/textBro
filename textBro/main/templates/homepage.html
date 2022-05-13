@@ -7,7 +7,8 @@
 <body>
 <form method="post">
     {% csrf_token %}
-    {{ form }}
+    {{ form.text_link }}
+    {{ form.text_password }}
     <input type="submit" value="Submit">
 </form>
 <br>

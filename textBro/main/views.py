@@ -2,6 +2,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, redirect
 from .forms import textsForm
 from .models import texts
+import hashlib
 
 
 def index(request):
@@ -10,6 +11,7 @@ def index(request):
         form = textsForm(request.POST)
         if form.is_valid():
             instance = form.save(commit=False)
+            instance.text_password = hashlib.sha256(instance.text_password.encode('utf-8')).hexdigest()
             instance.save()
             next = request.POST.get('next', '/')
             return HttpResponseRedirect(next)
@@ -30,7 +32,8 @@ def editTextAskPassword(request, link):
     if request.method == "POST":
         enterPassword = request.POST['enter-text-password']
     if enterPassword != "":
-        return redirect('/edit/' + link + '/' + enterPassword)
+        check_password = hashlib.sha256(enterPassword.encode('utf-8')).hexdigest()
+        return redirect('/edit/' + link + '/' + check_password)
     return render(request, 'password.html', context)
 
 
@@ -48,12 +51,13 @@ def verify(request):
     if request.method == "POST":
         link_input = request.POST['text-link']
         password_input = request.POST['text-password']
+        check_password = hashlib.sha256(password_input.encode('utf-8')).hexdigest()
         try:
-            instance = texts.objects.get(text_link=link_input, text_password=password_input)
+            instance = texts.objects.get(text_link=link_input, text_password=check_password)
         except Exception as e:
             print(e)
         if instance is not None:
-            return redirect('/edit/' + link_input+'/'+password_input)
+            return redirect('/edit/' + link_input+'/'+check_password)
         else:
             return redirect('/')
     return redirect('/')
