@@ -7,8 +7,8 @@ app_name = 'textBro'
 
 urlpatterns = [
     path('', views.index, name='index'),
-    path('edit/<str:link>/<str:password>/', views.editText, name="editText"),
-    path('edit/<str:link>/', views.editTextAskPassword, name="editTextAskPassword"),
+    path('<str:link>/<str:password>/', views.editText, name="editText"),
+    path('<str:link>/', views.editTextAskPassword, name="editTextAskPassword"),
     path('save/<str:link>/<str:password>/', views.saveText, name="saveText"),
     path('verify', views.verify, name="verify"),
 ]

@@ -33,7 +33,7 @@ def editTextAskPassword(request, link):
         enterPassword = request.POST['enter-text-password']
     if enterPassword != "":
         check_password = hashlib.sha256(enterPassword.encode('utf-8')).hexdigest()
-        return redirect('/edit/' + link + '/' + check_password)
+        return redirect('/' + link + '/' + check_password)
     return render(request, 'password.html', context)
 
 
@@ -43,7 +43,7 @@ def saveText(request, link, password):
         textEditBox = request.POST['edit-box']
     instance.text = textEditBox
     instance.save()
-    return redirect('/edit/' + link + '/' + password)
+    return redirect('/' + link + '/' + password)
 
 
 def verify(request):
@@ -57,7 +57,7 @@ def verify(request):
         except Exception as e:
             print(e)
         if instance is not None:
-            return redirect('/edit/' + link_input+'/'+check_password)
+            return redirect('/' + link_input+'/'+check_password)
         else:
             return redirect('/')
     return redirect('/')
