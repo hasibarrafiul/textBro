@@ -30,4 +30,5 @@ def saveText(request, link):
         textEditBox = request.POST['edit-box']
     instance.text = textEditBox
     instance.save()
-    return redirect('/')
+    response = editText(request, link)
+    return HttpResponse(response)
