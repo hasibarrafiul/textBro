@@ -18,19 +18,29 @@ def index(request):
     return render(request, 'homepage.html', {'form': form})
 
 
-def editText(request, link):
-    instance = texts.objects.get(text_link=link)
-    context = {'link': instance.text_link, 'text': instance.text}
+def editText(request, link, password):
+    instance = texts.objects.get(text_link=link, text_password=password)
+    context = {'link': instance.text_link, 'text': instance.text, 'password': instance.text_password}
     return render(request, 'editText.html', context)
 
 
-def saveText(request, link):
+def editTextAskPassword(request, link):
+    context = {'link': link}
+    enterPassword = ""
+    if request.method == "POST":
+        enterPassword = request.POST['enter-text-password']
+    if enterPassword != "":
+        return redirect('/edit/' + link + '/' + enterPassword)
+    return render(request, 'password.html', context)
+
+
+def saveText(request, link, password):
     instance = texts.objects.get(text_link=link)
     if request.method == "POST":
         textEditBox = request.POST['edit-box']
     instance.text = textEditBox
     instance.save()
-    return redirect('/edit/' + link)
+    return redirect('/edit/' + link + '/' + password)
 
 
 def verify(request):
@@ -43,7 +53,7 @@ def verify(request):
         except Exception as e:
             print(e)
         if instance is not None:
-            return redirect('/edit/' + link_input)
+            return redirect('/edit/' + link_input+'/'+password_input)
         else:
             return redirect('/')
     return redirect('/')
