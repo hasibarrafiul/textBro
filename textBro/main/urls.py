@@ -14,4 +14,5 @@ urlpatterns = [
     path('newtab/<str:link>/<str:password>/', views.newTab, name="newTab"),
     path('verify', views.verify, name="verify"),
     path('openTab/<str:link>/<str:password>/<str:tab>', views.openTab, name="openTab"),
+    path('saveTabInside/<str:link>/<str:password>/<str:tab>', views.saveTextTabInside, name="saveTabInside"),
 ]

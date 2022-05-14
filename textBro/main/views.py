@@ -155,3 +155,32 @@ def openTab(request, link, password, tab):
 
     context = {'link': instance.text_link, 'text': sendText, 'password': instance.text_password, 'tab': tab}
     return render(request, 'newTab.html', context)
+
+
+def saveTextTabInside(request, link, password, tab):
+    instance = texts.objects.get(text_link=link)
+    print(tab)
+
+    if request.method == "POST":
+        textEditBox = request.POST['edit-box-tab']
+    if tab == "text1":
+        instance.text1 = textEditBox
+    elif tab == "text2":
+        instance.text2 = textEditBox
+    elif tab == "text3":
+        instance.text3 = textEditBox
+    elif tab == "text4":
+        instance.text4 = textEditBox
+    elif tab == "text5":
+        instance.text5 = textEditBox
+    elif tab == "text6":
+        instance.text6 = textEditBox
+    elif tab == "text7":
+        instance.text7 = textEditBox
+    elif tab == "text8":
+        instance.text8 = textEditBox
+    elif tab == "text9":
+        instance.text9 = textEditBox
+
+    instance.save()
+    return redirect('/'+'openTab/' + link + '/' + password + '/' + tab)

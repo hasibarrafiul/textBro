@@ -5,7 +5,7 @@
     <title>Title</title>
 </head>
 <body>
-<form method="POST" action="{% url 'textBro:saveTextTabOpen' link password tab %}">
+<form method="POST" action="{% url 'textBro:saveTabInside' link password tab %}">
 		{% csrf_token %}
 {{ link }}<br>
 <textarea name="edit-box-tab" rows="4" cols="50" maxlength="200">
