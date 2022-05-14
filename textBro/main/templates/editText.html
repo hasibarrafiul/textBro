@@ -15,6 +15,34 @@
 </form>
 
 <a href="{% url 'textBro:newTab' link password %}">New tab</a>
+<br>
+{% if text1 != ""  %}
+<a href="{% url 'textBro:openTab' link password 'text1' %}">Tab 1 </a> <br>
+{% endif %}
+{% if text2 != ""  %}
+<a href="{% url 'textBro:openTab' link password 'text2' %}">Tab 2 </a> <br>
+{% endif %}
+{% if text3 != ""  %}
+<a href="{% url 'textBro:openTab' link password 'text3' %}">Tab 3 </a> <br>
+{% endif %}
+{% if text4 != ""  %}
+<a href="{% url 'textBro:openTab' link password 'text4' %}">Tab 4 </a> <br>
+{% endif %}
+{% if text5 != ""  %}
+<a href="{% url 'textBro:openTab' link password 'text5' %}">Tab 5 </a> <br>
+{% endif %}
+{% if text6 != ""  %}
+<a href="{% url 'textBro:openTab' link password 'text6' %}">Tab 6 </a> <br>
+{% endif %}
+{% if text7 != ""  %}
+<a href="{% url 'textBro:openTab' link password 'text7' %}">Tab 7 </a> <br>
+{% endif %}
+{% if text8 != ""  %}
+<a href="{% url 'textBro:openTab' link password 'text8' %}">Tab 8 </a> <br>
+{% endif %}
+{% if text9 != ""  %}
+<a href="{% url 'textBro:openTab' link password 'text9' %}">Tab 9 </a> <br>
+{% endif %}
 
 </body>
 </html>

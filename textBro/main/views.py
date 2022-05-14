@@ -22,7 +22,7 @@ def index(request):
 
 def editText(request, link, password):
     instance = texts.objects.get(text_link=link, text_password=password)
-    context = {'link': instance.text_link, 'text': instance.text, 'password': instance.text_password}
+    context = {'link': instance.text_link, 'text': instance.text, 'password': instance.text_password, 'text1': instance.text1, 'text2': instance.text2, 'text3': instance.text3, 'text4': instance.text4, 'text5': instance.text5, 'text6': instance.text6, 'text7': instance.text7, 'text8': instance.text8, 'text9': instance.text9}
     return render(request, 'editText.html', context)
 
 
@@ -109,9 +109,8 @@ def saveTextNewTab(request, link, password, tab):
     elif tab == "text9":
         instance.text9 = textEditBox
 
-
     instance.save()
-    return redirect('/' + link + '/' + password)
+    return redirect('/'+'openTab/' + link + '/' + password + '/' + tab)
 
 
 def verify(request):
@@ -129,3 +128,30 @@ def verify(request):
         else:
             return redirect('/')
     return redirect('/')
+
+
+def openTab(request, link, password, tab):
+    instance = texts.objects.get(text_link=link, text_password=password)
+    if tab == "text1":
+        sendText = instance.text1
+    elif tab == "text2":
+        sendText = instance.text2
+    elif tab == "text3":
+        sendText = instance.text3
+    elif tab == "text4":
+        sendText = instance.text4
+    elif tab == "text5":
+        sendText = instance.text5
+    elif tab == "text6":
+        sendText = instance.text6
+    elif tab == "text7":
+        sendText = instance.text7
+    elif tab == "text8":
+        sendText = instance.text8
+    elif tab == "text9":
+        sendText = instance.text9
+    else:
+        return HttpResponse("Tab not found")
+
+    context = {'link': instance.text_link, 'text': sendText, 'password': instance.text_password, 'tab': tab}
+    return render(request, 'newTab.html', context)
